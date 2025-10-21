@@ -1,4 +1,11 @@
 import random
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def deal_cards(reciever):
+    return reciever.append(random.choice(cards))
+
+def calculate_score(deck):
+    return sum(deck)
 
 def print_card():
     print(f"Your final cards: {user_cards}, Final score: {user_score}")
@@ -13,15 +20,36 @@ def stand(user_diff, computer_diff):
         print_card()
         print("Better luck next time")
 
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+def check_bust(deck):
+    score=calculate_score(deck)
+    if score>21:
+        while 11 in deck and sum(deck) > 21:
+            loc=deck.index(11)
+            deck[loc]=1
+    score=calculate_score(deck)
+    if score>21:
+        return True
+    else: 
+        return False
+
+def check_blackjack(deck):
+    score=calculate_score(deck)
+    if score==21:
+        return True
+    else:
+        return False
+
+        
 start = input("Do you want to play a game of Black Jack? y or n: ")
 while start=='y':
-    user_cards=[random.choice(cards), random.choice(cards)]
-    computer_cards=[random.choice(cards), random.choice(cards)]
+    user_cards=[]
+    computer_cards=[]
+    for i in range(0,2):
+        deal_cards(user_cards)
+        deal_cards(computer_cards)
 
-    # Calculation of scores
-    user_score = sum(user_cards)
-    computer_score = sum(computer_cards)
+    user_score = calculate_score(user_cards)
+    computer_score=calculate_score(computer_cards)
 
     # Calculating dist from 21
     user_diff = 21 - user_score
@@ -76,11 +104,13 @@ while start=='y':
                     print("Bust!!")
                     print_card()
                     print("Better luck next time")
+                    start=input("Do you want to play again? y or n: ")
                     break
                 else:
                     print("Dealer Busted")
                     print_card()
                     print("Congratulation! You Win")
+                    start=input("Do you want to play again? y or n: ")
                     break
 
             # Checking for Black Jack
@@ -88,10 +118,12 @@ while start=='y':
                 if user_score==21:
                     print("You've got a BlackJack")
                     print("Congratulation! You Win")
+                    start=input("Do you want to play again? y or n: ")
                     break
                 else:
                     print("Dealer got a BlackJack")
                     print("Better luck next time")
+                    start=input("Do you want to play again? y or n: ")
                     break
             
             hit_or_stand = input("Do you want to hit (take one more card) or stand (keep your current hand)?\n")
