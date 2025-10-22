@@ -107,7 +107,6 @@ def play():
         # Asking for Hit or Stand
         hit_or_stand = input("Do you want to hit (take one more card) or stand (keep your current hand)?\n")
 
-        # All Cases of Stand
         if hit_or_stand == 'stand':
             while sum(computer_cards) < 17:
                 deal_cards(computer_cards)
@@ -131,6 +130,15 @@ def play():
                     print_card(user_cards, computer_cards)
                     return
                 hit_or_stand = input("Do you want to hit (take one more card) or stand (keep your current hand)?\n")
+                if hit_or_stand == 'stand':
+                    while sum(computer_cards) < 17:
+                        deal_cards(computer_cards)
+                        round_over = resolve_round(user_cards, computer_cards)
+                        if round_over:
+                            print_card(user_cards, computer_cards)
+                            return
+                    stand(user_cards, computer_cards)
+                    return
 
 
 while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
