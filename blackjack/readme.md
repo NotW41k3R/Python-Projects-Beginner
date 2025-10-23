@@ -1,5 +1,5 @@
-My First "Big" Project
+# Blackjack
+Completed on Day 11 of 100 Days of Python
 
-Fully Working CLI based Black Jack which covers every single edge case in a typical game of Black Jack
-
-Two Versions because i found a major improvement mid way and thought i'll keep the old one as well 
+Fully functional CLI Blackjack game covering all typical edge cases. Includes two versions because I found a major improvement mid-way and preserved the original as well.  
+Skills learned: Game logic, modular design, edge case handling, functions with outputs, loops, conditionals.
